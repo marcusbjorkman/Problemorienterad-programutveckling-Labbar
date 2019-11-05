@@ -1,0 +1,21 @@
+﻿<Window x:Class="Uppgift8.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Uppgift8"
+        mc:Ignorable="d"
+        Title="Kalkylator" Height="289.286" Width="599.107">
+    <Grid>
+        <TextBox x:Name="NumInput1" PreviewTextInput="NumInput_PreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="60,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <RadioButton x:Name="RadioPlus" Content="+" IsChecked="True" GroupName="MathOp" HorizontalAlignment="Left" Margin="196,100,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RadioMinus" Content="-" GroupName="MathOp" HorizontalAlignment="Left" Margin="196,115,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RadioMulti" Content="*" GroupName="MathOp" HorizontalAlignment="Left" Margin="196,130,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RadioDiv" Content="/" GroupName="MathOp" HorizontalAlignment="Left" Margin="196,145,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NumInput2" PreviewTextInput="NumInput_PreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="237,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="=" FontSize="30" HorizontalAlignment="Left" Margin="362,100,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtBoxResult" PreviewTextInput="TxtBoxResult_PreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="398,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="BtnCalc" Content="Beräkna" Click="BtnCalc_Click" HorizontalAlignment="Left" Margin="341,145,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
