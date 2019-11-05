@@ -1,0 +1,24 @@
+﻿<Window x:Class="Uppgift15.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Uppgift15"
+        mc:Ignorable="d"
+        Title="Rotvälska" Height="270.536" Width="580.357">
+    <Grid>
+        <Label Content="Grundtext" HorizontalAlignment="Left" Margin="44,56,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtBoxInput" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="86" Margin="44,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172"/>
+        <Button x:Name="BtnConvertJibberish" Click="BtnConvert_Click" HorizontalAlignment="Left" Margin="237,82,0,0" VerticalAlignment="Top" Width="75" Height="46">
+            <TextBlock TextWrapping="Wrap" Text="Konvertera rotvälska"/>
+        </Button>
+        <Button x:Name="BtnConvertRovare" Click="BtnConvert_Click" HorizontalAlignment="Left" Margin="237,128,0,0" VerticalAlignment="Top" Width="75" Height="46">
+            <TextBlock TextWrapping="Wrap"  Text="Konvertera rövarspråk"/>
+        </Button>
+        <Label x:Name="LblConvertedLang" HorizontalAlignment="Left" Margin="340,56,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="TxtBlockOutput" HorizontalAlignment="Left" Margin="340,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="86" Width="172"/>
+        <Label Content="Antal vokaler:" HorizontalAlignment="Left" Margin="202,186,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="TxtBlockNumVowels" HorizontalAlignment="Left" Margin="289,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

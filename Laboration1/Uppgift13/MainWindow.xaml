@@ -1,0 +1,19 @@
+﻿<Window x:Class="Uppgift13.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Uppgift13"
+        mc:Ignorable="d"
+        Title="Bokstavssök" Height="444.643" Width="335.714">
+    <Grid>
+        <Label Content="Fyll i din text" HorizontalAlignment="Left" Margin="42,70,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtBoxTextInput" HorizontalAlignment="Left" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="148" Margin="42,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244"/>
+        <Label Content="Sök efter" HorizontalAlignment="Left" Margin="42,249,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtBoxSearchInput" PreviewTextInput="TxtBoxSearchInput_PreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="42,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="BtnCount" Content="Räkna" Click="BtnCount_Click" HorizontalAlignment="Left" Margin="167,275,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
+        <Label Content="Resultat" HorizontalAlignment="Left" Margin="42,303,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="TxtBlockResult" HorizontalAlignment="Left" Margin="42,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="50" Width="200"/>
+
+    </Grid>
+</Window>
