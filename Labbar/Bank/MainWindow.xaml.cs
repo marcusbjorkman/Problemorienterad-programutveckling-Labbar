@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bank.Models.Accounts;
+using Bank.Models.Customers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,27 @@ namespace Bank
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var customer = new Customer(null, "Bärt", "Bärtsson");
+
+            var retirementAcc = customer.AddAccount<RetirementAccount>();
+            retirementAcc.Deposit(660);
+            if (!retirementAcc.TryWithdraw(600, out double availableRetirementBalance)
+                || availableRetirementBalance > 0)
+            {
+                throw new Exception();
+            }
+
+            var checkingAcc = customer.AddAccount<CheckingAccount>(1500);
+            checkingAcc.Deposit(300);
+            if (!checkingAcc.TryWithdraw(1800, out _)
+                || checkingAcc.Balance != -1500)
+            {
+                throw new Exception();
+            }
         }
     }
 }

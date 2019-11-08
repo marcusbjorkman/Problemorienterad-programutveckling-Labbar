@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bank"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="287.5" Width="379.464">
     <Grid>
-        
+        <Button Content="Dummy" Click="Button_Click" HorizontalAlignment="Left" Margin="111,83,0,0" VerticalAlignment="Top" Width="129" Height="73"/>
+
     </Grid>
 </Window>

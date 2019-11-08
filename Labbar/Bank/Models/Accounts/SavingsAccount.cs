@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bank.Models.Accounts
 {
@@ -17,7 +13,22 @@ namespace Bank.Models.Accounts
 
         public override bool TryWithdraw(double amount, out double availableBalance)
         {
-            throw new NotImplementedException();
+            if (amount < 0)
+            {
+                throw new ArgumentException("Cannot withdraw less than 0", nameof(amount));
+            }
+
+            var currentBalance = GetAvailableBalance();
+            if (amount > currentBalance)
+            {
+                availableBalance = currentBalance;
+                return false;
+            }
+
+            Balance -= amount;
+            availableBalance = GetAvailableBalance();
+
+            return true;
         }
     }
 }

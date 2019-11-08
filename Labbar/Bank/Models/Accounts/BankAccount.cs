@@ -4,6 +4,7 @@ namespace Bank.Models.Accounts
 {
     public abstract class BankAccount
     {
+        public Guid Id { get; }
         public Type AccountType { get; }
 
         public double Balance { get; protected set; }
@@ -12,7 +13,8 @@ namespace Bank.Models.Accounts
 
         protected BankAccount(Type accountType)
         {
-            AccountType = AccountType;
+            AccountType = accountType;
+            Id = Guid.NewGuid();
         }
 
         /// <summary>

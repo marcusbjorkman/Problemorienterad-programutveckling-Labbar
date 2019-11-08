@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bank.Models.Accounts
 {
@@ -23,6 +19,17 @@ namespace Bank.Models.Accounts
 
             var totalWithdrawal = amount * 1.1;
             var currentBalance = GetAvailableBalance();
+
+            if (totalWithdrawal > currentBalance)
+            {
+                availableBalance = currentBalance;
+                return false;
+            }
+
+            Balance -= totalWithdrawal;
+            availableBalance = GetAvailableBalance();
+
+            return true;
         }
     }
 }
