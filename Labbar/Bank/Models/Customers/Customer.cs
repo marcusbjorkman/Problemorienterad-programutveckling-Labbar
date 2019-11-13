@@ -12,6 +12,8 @@ namespace Bank.Models.Customers
         public string LastName { get; set; }
         public List<BankAccount> BankAccounts { get; } = new List<BankAccount>();
 
+        public string FullName => $"{FirstName} {LastName}";
+
         public Customer(string cellPhone, string firstName, string lastnName)
         {
             Cellphone = cellPhone;

@@ -2,6 +2,7 @@
 using Bank.Models.Customers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,30 +23,59 @@ namespace Bank
     /// </summary>
     public partial class MainWindow : Window
     {
+        private NewCustomerWindow newCustomerWindow;
+        private NewAccountWindow newAccountWindow;
+
+        private Customer activeCustomer;
+        private BankAccount activeAccount;
+
+        public readonly ObservableCollection<Customer> CustomerList = new ObservableCollection<Customer> { null };
+        public ObservableCollection<BankAccount> AccountList { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            
+            ComboBoxCustomer.ItemsSource = CustomerList;
+            ComboBoxCustomer.DisplayMemberPath = nameof(Customer.FullName);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnNewCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customer = new Customer(null, "Bärt", "Bärtsson");
-
-            var retirementAcc = customer.AddAccount<RetirementAccount>();
-            retirementAcc.Deposit(660);
-            if (!retirementAcc.TryWithdraw(600, out double availableRetirementBalance)
-                || availableRetirementBalance > 0)
+            if (newCustomerWindow == null || newCustomerWindow.IsLoaded == false)
             {
-                throw new Exception();
+                newCustomerWindow = new NewCustomerWindow();
+                newCustomerWindow.Owner = this;
+                newCustomerWindow.Show();
             }
 
-            var checkingAcc = customer.AddAccount<CheckingAccount>(1500);
-            checkingAcc.Deposit(300);
-            if (!checkingAcc.TryWithdraw(1800, out _)
-                || checkingAcc.Balance != -1500)
+            newCustomerWindow.Activate();
+        }
+
+        private void BtnNewAccount_Click(object sender, RoutedEventArgs e)
+        {
+            if (newAccountWindow == null || newAccountWindow.IsLoaded == false)
             {
-                throw new Exception();
+                newAccountWindow = new NewAccountWindow();
+                newAccountWindow.Owner = this;
+                newAccountWindow.Show();
             }
+
+            newAccountWindow.Activate();
+        }
+
+        private void ComboBoxCustomer_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems?[0] == null)
+            {
+                GridSelectCustomer.IsEnabled = false;
+                return;
+            }
+
+            activeCustomer = (sender as ComboBox).SelectedItem as Customer;
+            AccountList = new ObservableCollection<BankAccount>(activeCustomer.BankAccounts);
+
+            GridSelectCustomer.IsEnabled = true;
         }
     }
 }
