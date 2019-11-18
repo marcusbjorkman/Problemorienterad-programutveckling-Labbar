@@ -14,7 +14,7 @@
         <RadioButton GroupName="RadioAccountType" Content="Pensionsspar" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
         <Label Content="Kredit" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TxtBoxCredit" HorizontalAlignment="Left" Height="23" Margin="10,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
-        <Button x:Name="BtnAddAccount" Content="Ok" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="BtnAddAccount" Click="BtnAddAccount_Click" Content="Ok" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

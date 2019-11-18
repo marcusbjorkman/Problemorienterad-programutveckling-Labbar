@@ -26,11 +26,11 @@ namespace Bank
         private NewCustomerWindow newCustomerWindow;
         private NewAccountWindow newAccountWindow;
 
-        private Customer activeCustomer;
-        private BankAccount activeAccount;
+        public Customer ActiveCustomer { get; private set; }
+        public BankAccount ActiveAccount { get; private set; }
 
         public readonly ObservableCollection<Customer> CustomerList = new ObservableCollection<Customer> { null };
-        public ObservableCollection<BankAccount> AccountList { get; private set; }
+        public ObservableCollection<BankAccount> AccountList { get; private set; } = new ObservableCollection<BankAccount> { null };
 
         public MainWindow()
         {
@@ -38,6 +38,9 @@ namespace Bank
             
             ComboBoxCustomer.ItemsSource = CustomerList;
             ComboBoxCustomer.DisplayMemberPath = nameof(Customer.FullName);
+
+            ComboBoxAccount.ItemsSource = AccountList;
+            ComboBoxAccount.DisplayMemberPath = nameof(BankAccount.Id);
         }
 
         private void BtnNewCustomer_Click(object sender, RoutedEventArgs e)
@@ -72,10 +75,22 @@ namespace Bank
                 return;
             }
 
-            activeCustomer = (sender as ComboBox).SelectedItem as Customer;
-            AccountList = new ObservableCollection<BankAccount>(activeCustomer.BankAccounts);
+            ActiveCustomer = (sender as ComboBox).SelectedItem as Customer;
+            AccountList = new ObservableCollection<BankAccount>(ActiveCustomer.BankAccounts);
 
             GridSelectCustomer.IsEnabled = true;
+        }
+
+        private void ComboBoxAccount_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems?[0] == null)
+            {
+                GridSelectAccount.IsEnabled = false;
+                return;
+            }
+
+            ActiveAccount = (sender as ComboBox).SelectedItem as BankAccount;
+            GridSelectAccount.IsEnabled = true;
         }
     }
 }

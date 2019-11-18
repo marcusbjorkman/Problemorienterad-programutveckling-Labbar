@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bank.Models.Accounts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,6 +36,21 @@ namespace Bank
         private void RadioBtnChecking_Unchecked(object sender, RoutedEventArgs e)
         {
             TxtBoxCredit.IsEnabled = false;
+        }
+
+        private void BtnAddAccount_Click(object sender, RoutedEventArgs e)
+        {
+            var owner = Owner as MainWindow;
+            if (owner.AccountList?.FirstOrDefault() == null)
+            {
+                owner.AccountList?.Remove(null);
+            }
+
+            var newAccount = owner.ActiveCustomer.AddAccount<CheckingAccount>(200);
+            owner.AccountList.Add(newAccount);
+
+            owner.ComboBoxAccount.SelectedItem = newAccount;
+            Close();
         }
     }
 }
