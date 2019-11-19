@@ -6,6 +6,15 @@ namespace Bank.Models.Accounts
     {
         public Guid Id { get; }
         public Type AccountType { get; }
+        public string DisplayName
+        {
+            get
+            {
+                return Credit == 0 
+                    ? $"{Balance}kr - {AccountType.Name} - {Id}"
+                    : $"{Balance}kr - Kredit: {Credit}kr - {AccountType.Name} - {Id}";
+            }
+        }
 
         public double Balance { get; protected set; }
 

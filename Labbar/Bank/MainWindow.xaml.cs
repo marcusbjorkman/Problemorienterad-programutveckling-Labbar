@@ -1,20 +1,10 @@
 ﻿using Bank.Models.Accounts;
 using Bank.Models.Customers;
+
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Bank
 {
@@ -30,7 +20,7 @@ namespace Bank
         public BankAccount ActiveAccount { get; private set; }
 
         public readonly ObservableCollection<Customer> CustomerList = new ObservableCollection<Customer> { null };
-        public ObservableCollection<BankAccount> AccountList { get; private set; } = new ObservableCollection<BankAccount> { null };
+        public ObservableCollection<BankAccount> AccountList { get; private set; }
 
         public MainWindow()
         {
@@ -38,9 +28,8 @@ namespace Bank
             
             ComboBoxCustomer.ItemsSource = CustomerList;
             ComboBoxCustomer.DisplayMemberPath = nameof(Customer.FullName);
-
-            ComboBoxAccount.ItemsSource = AccountList;
-            ComboBoxAccount.DisplayMemberPath = nameof(BankAccount.Id);
+            
+            ComboBoxAccount.DisplayMemberPath = nameof(BankAccount.DisplayName);
         }
 
         private void BtnNewCustomer_Click(object sender, RoutedEventArgs e)
@@ -77,6 +66,7 @@ namespace Bank
 
             ActiveCustomer = (sender as ComboBox).SelectedItem as Customer;
             AccountList = new ObservableCollection<BankAccount>(ActiveCustomer.BankAccounts);
+            ComboBoxAccount.ItemsSource = AccountList;
 
             GridSelectCustomer.IsEnabled = true;
         }
@@ -91,6 +81,37 @@ namespace Bank
 
             ActiveAccount = (sender as ComboBox).SelectedItem as BankAccount;
             GridSelectAccount.IsEnabled = true;
+            TxtBlockWithdrawals.Text = null;
+        }
+
+        private void BtnOkTransaction_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TxtBoxAmount.Text) 
+                || !double.TryParse(TxtBoxAmount.Text, out double amount))
+            {
+                MessageBox.Show("Ange ett belopp först!");
+                return;
+            }
+
+            if (RadioBtnWithdraw.IsChecked.Value)
+            {
+                if (ActiveAccount.TryWithdraw(amount, out _))
+                {
+                    TxtBlockWithdrawals.Text += 
+                        $"{DateTime.Now.ToString("yyyy-MM-dd hh:mm")} - {RadioBtnWithdraw.Content} - {amount}kr\n";
+                }
+                else
+                {
+                    MessageBox.Show("För lågt saldo.");
+                    return;
+                }
+            }
+            else
+            {
+                ActiveAccount.Deposit(amount);
+                TxtBlockWithdrawals.Text +=
+                    $"{DateTime.Now.ToString("yyyy-MM-dd hh:mm")} - {RadioBtnDeposit.Content} - {amount}kr\n";
+            }
         }
     }
 }

@@ -33,7 +33,15 @@ namespace Bank
                 owner.CustomerList.Remove(null);
             }
 
-            var customer = new Customer("0123", "Erik", "Öberg");
+            if (string.IsNullOrEmpty(TxtBoxFirstname.Text)
+                || string.IsNullOrEmpty(TxtBoxLastname.Text)
+                || string.IsNullOrEmpty(TxtBoxPhoneNumber.Text))
+            {
+                MessageBox.Show("Fyll i alla fält.");
+                return;
+            }
+
+            var customer = new Customer(TxtBoxPhoneNumber.Text, TxtBoxFirstname.Text, TxtBoxLastname.Text);
             owner.CustomerList.Add(customer);
 
             owner.ComboBoxCustomer.SelectedItem = customer;

@@ -46,7 +46,26 @@ namespace Bank
                 owner.AccountList?.Remove(null);
             }
 
-            var newAccount = owner.ActiveCustomer.AddAccount<CheckingAccount>(200);
+            double credit = 0;
+            if (!string.IsNullOrEmpty(TxtBoxCredit.Text) && double.TryParse(TxtBoxCredit.Text, out credit))
+            {
+
+            }
+
+            BankAccount newAccount = null;
+            if (RadioBtnChecking.IsChecked.Value)
+            {
+                newAccount = owner.ActiveCustomer.AddAccount<CheckingAccount>(credit);
+            }
+            else if (RadioBtnSaving.IsChecked.Value)
+            {
+                newAccount = owner.ActiveCustomer.AddAccount<SavingsAccount>();
+            }
+            else
+            {
+                newAccount = owner.ActiveCustomer.AddAccount<RetirementAccount>();
+            }
+
             owner.AccountList.Add(newAccount);
 
             owner.ComboBoxAccount.SelectedItem = newAccount;

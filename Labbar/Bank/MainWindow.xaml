@@ -19,11 +19,11 @@
             <Grid x:Name="GridSelectAccount" IsEnabled="False">
                 <Label Content="Hantera transaktioner" FontSize="14" HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top" Width="150"/>
                 <Label Content="Typ" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top"/>
-                <RadioButton IsChecked="True" GroupName="RadioTransactionType" Content="Uttag" HorizontalAlignment="Left" Margin="10,316,0,0" VerticalAlignment="Top"/>
-                <RadioButton GroupName="RadioTransactionType" Content="Insättning" HorizontalAlignment="Left" Margin="10,331,0,0" VerticalAlignment="Top" Width="113"/>
+                <RadioButton x:Name="RadioBtnWithdraw" IsChecked="True" GroupName="RadioTransactionType" Content="Uttag" HorizontalAlignment="Left" Margin="10,316,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="RadioBtnDeposit" GroupName="RadioTransactionType" Content="Insättning" HorizontalAlignment="Left" Margin="10,331,0,0" VerticalAlignment="Top" Width="113"/>
                 <Label Content="Belopp" HorizontalAlignment="Left" Margin="106,290,0,0" VerticalAlignment="Top" Width="74"/>
                 <TextBox x:Name="TxtBoxAmount" HorizontalAlignment="Left" Height="30" Margin="106,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127"/>
-                <Button x:Name="BtnOkTransaction" Content="Ok" HorizontalAlignment="Left" Margin="238,316,0,0" VerticalAlignment="Top" Width="118" Height="30"/>
+                <Button x:Name="BtnOkTransaction" Click="BtnOkTransaction_Click" Content="Ok" HorizontalAlignment="Left" Margin="238,316,0,0" VerticalAlignment="Top" Width="118" Height="30"/>
                 <Label Content="Kontoutdrag" HorizontalAlignment="Left" Margin="10,374,0,0" VerticalAlignment="Top" Width="122"/>
                 <TextBlock x:Name="TxtBlockWithdrawals" HorizontalAlignment="Left" Margin="10,400,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="112" Width="346" Background="White"/>
             </Grid>
