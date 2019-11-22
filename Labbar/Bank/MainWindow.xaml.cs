@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace Bank
 {
@@ -73,13 +74,18 @@ namespace Bank
 
         private void ComboBoxAccount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems?[0] == null)
+            if (((object[])e.AddedItems)?.FirstOrDefault() == null)
             {
-                GridSelectAccount.IsEnabled = false;
                 return;
             }
 
-            ActiveAccount = (sender as ComboBox).SelectedItem as BankAccount;
+            var selectedAccount = (sender as ComboBox).SelectedItem as BankAccount;
+            if (selectedAccount == ActiveAccount)
+            {
+                return;
+            }
+
+            ActiveAccount = selectedAccount;
             GridSelectAccount.IsEnabled = true;
             TxtBlockWithdrawals.Text = null;
         }
@@ -102,7 +108,7 @@ namespace Bank
                 }
                 else
                 {
-                    MessageBox.Show("För lågt saldo.");
+                    MessageBox.Show("Du saknar täckning på kontot.");
                     return;
                 }
             }
@@ -112,6 +118,11 @@ namespace Bank
                 TxtBlockWithdrawals.Text +=
                     $"{DateTime.Now.ToString("yyyy-MM-dd hh:mm")} - {RadioBtnDeposit.Content} - {amount}kr\n";
             }
+
+            int sIndex = ComboBoxAccount.SelectedIndex;
+            ComboBoxAccount.SelectedIndex = -1;
+            ComboBoxAccount.Items.Refresh();
+            ComboBoxAccount.SelectedIndex = sIndex;
         }
     }
 }

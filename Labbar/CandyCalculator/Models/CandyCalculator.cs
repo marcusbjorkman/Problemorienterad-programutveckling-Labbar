@@ -1,5 +1,4 @@
 ﻿using CandyCalculator.Enums;
-using CandyCalculator.Models;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -34,11 +33,16 @@ namespace CandyCalculator.Models
             }
             else if (method == DivideCandyMethod.ByAge)
             {
-                toGiveExtraCandies = people.OrderBy(o => o.Age);
+                toGiveExtraCandies = people.OrderBy(o => o.Age).Take(rest);
             }
             else
             {
-                toGiveExtraCandies = people.OrderBy(o => o.Firstname);
+                toGiveExtraCandies = people.OrderBy(o => o.Firstname).Take(rest);
+            }
+
+            foreach (var p in toGiveExtraCandies)
+            {
+                p.Candies++;
             }
         }
 

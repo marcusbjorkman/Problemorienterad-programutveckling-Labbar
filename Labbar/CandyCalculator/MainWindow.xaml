@@ -15,11 +15,11 @@
         <ListBox x:Name="ListBoxPersons" HorizontalAlignment="Left" Height="183" Margin="105,20,0,0" VerticalAlignment="Top" Width="180"/>
         <Label Content="Antal godisar" HorizontalAlignment="Left" Margin="290,71,0,0" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="TxtBoxCandyAmount" HorizontalAlignment="Left" Height="23" Margin="290,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <Button x:Name="BtnDivide" Content="Fördela" HorizontalAlignment="Left" Margin="290,125,0,0" VerticalAlignment="Top" Width="80" Height="35"/>
-        <Button x:Name="BtnSave" Content="Spara" HorizontalAlignment="Left" Margin="290,168,0,0" VerticalAlignment="Top" Width="80" Height="35"/>
-        <RadioButton Content="Ålder" HorizontalAlignment="Left" Margin="290,26,0,0" VerticalAlignment="Top" Width="80"/>
-        <RadioButton Content="Namn" HorizontalAlignment="Left" Margin="290,41,0,0" VerticalAlignment="Top" Width="80"/>
-        <RadioButton Content="Ordning" HorizontalAlignment="Left" Margin="290,56,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="BtnDivide" Click="BtnDivide_Click" Content="Fördela" HorizontalAlignment="Left" Margin="290,125,0,0" VerticalAlignment="Top" Width="80" Height="35"/>
+        <Button x:Name="BtnSave" Click="BtnSave_Click" Content="Spara" HorizontalAlignment="Left" Margin="290,168,0,0" VerticalAlignment="Top" Width="80" Height="35"/>
+        <RadioButton x:Name="RadioBtnByAge" GroupName="RadioDivideMethod" Content="Ålder" HorizontalAlignment="Left" Margin="290,26,0,0" VerticalAlignment="Top" Width="80"/>
+        <RadioButton x:Name="RadioBtnByName" GroupName="RadioDivideMethod" Content="Namn" HorizontalAlignment="Left" Margin="290,41,0,0" VerticalAlignment="Top" Width="80"/>
+        <RadioButton x:Name="RadioBtnByOrder" GroupName="RadioDivideMethod" IsChecked="True" Content="Ordning" HorizontalAlignment="Left" Margin="290,56,0,0" VerticalAlignment="Top" Width="80"/>
 
     </Grid>
 </Window>
