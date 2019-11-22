@@ -1,19 +1,11 @@
 ﻿using Bank.Models.Accounts;
 using Bank.Models.Customers;
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Linq;
 
 namespace Bank
 {
@@ -22,30 +14,115 @@ namespace Bank
     /// </summary>
     public partial class MainWindow : Window
     {
+        private NewCustomerWindow newCustomerWindow;
+        private NewAccountWindow newAccountWindow;
+
+        public Customer ActiveCustomer { get; private set; }
+        public BankAccount ActiveAccount { get; private set; }
+
+        public readonly ObservableCollection<Customer> CustomerList = new ObservableCollection<Customer> { null };
+        public ObservableCollection<BankAccount> AccountList { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            
+            ComboBoxCustomer.ItemsSource = CustomerList;
+            ComboBoxCustomer.DisplayMemberPath = nameof(Customer.FullName);
+            
+            ComboBoxAccount.DisplayMemberPath = nameof(BankAccount.DisplayName);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnNewCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customer = new Customer(null, "Bärt", "Bärtsson");
-
-            var retirementAcc = customer.AddAccount<RetirementAccount>();
-            retirementAcc.Deposit(660);
-            if (!retirementAcc.TryWithdraw(600, out double availableRetirementBalance)
-                || availableRetirementBalance > 0)
+            if (newCustomerWindow == null || newCustomerWindow.IsLoaded == false)
             {
-                throw new Exception();
+                newCustomerWindow = new NewCustomerWindow();
+                newCustomerWindow.Owner = this;
+                newCustomerWindow.Show();
             }
 
-            var checkingAcc = customer.AddAccount<CheckingAccount>(1500);
-            checkingAcc.Deposit(300);
-            if (!checkingAcc.TryWithdraw(1800, out _)
-                || checkingAcc.Balance != -1500)
+            newCustomerWindow.Activate();
+        }
+
+        private void BtnNewAccount_Click(object sender, RoutedEventArgs e)
+        {
+            if (newAccountWindow == null || newAccountWindow.IsLoaded == false)
             {
-                throw new Exception();
+                newAccountWindow = new NewAccountWindow();
+                newAccountWindow.Owner = this;
+                newAccountWindow.Show();
             }
+
+            newAccountWindow.Activate();
+        }
+
+        private void ComboBoxCustomer_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems?[0] == null)
+            {
+                GridSelectCustomer.IsEnabled = false;
+                return;
+            }
+
+            ActiveCustomer = (sender as ComboBox).SelectedItem as Customer;
+            AccountList = new ObservableCollection<BankAccount>(ActiveCustomer.BankAccounts);
+            ComboBoxAccount.ItemsSource = AccountList;
+
+            GridSelectCustomer.IsEnabled = true;
+        }
+
+        private void ComboBoxAccount_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (((object[])e.AddedItems)?.FirstOrDefault() == null)
+            {
+                return;
+            }
+
+            var selectedAccount = (sender as ComboBox).SelectedItem as BankAccount;
+            if (selectedAccount == ActiveAccount)
+            {
+                return;
+            }
+
+            ActiveAccount = selectedAccount;
+            GridSelectAccount.IsEnabled = true;
+            TxtBlockWithdrawals.Text = null;
+        }
+
+        private void BtnOkTransaction_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TxtBoxAmount.Text) 
+                || !double.TryParse(TxtBoxAmount.Text, out double amount))
+            {
+                MessageBox.Show("Ange ett belopp först!");
+                return;
+            }
+
+            if (RadioBtnWithdraw.IsChecked.Value)
+            {
+                if (ActiveAccount.TryWithdraw(amount, out _))
+                {
+                    TxtBlockWithdrawals.Text += 
+                        $"{DateTime.Now.ToString("yyyy-MM-dd hh:mm")} - {RadioBtnWithdraw.Content} - {amount}kr\n";
+                }
+                else
+                {
+                    MessageBox.Show("Du saknar täckning på kontot.");
+                    return;
+                }
+            }
+            else
+            {
+                ActiveAccount.Deposit(amount);
+                TxtBlockWithdrawals.Text +=
+                    $"{DateTime.Now.ToString("yyyy-MM-dd hh:mm")} - {RadioBtnDeposit.Content} - {amount}kr\n";
+            }
+
+            int sIndex = ComboBoxAccount.SelectedIndex;
+            ComboBoxAccount.SelectedIndex = -1;
+            ComboBoxAccount.Items.Refresh();
+            ComboBoxAccount.SelectedIndex = sIndex;
         }
     }
 }

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A9FBC8C0-D828-424E-B158-AA866FB6E8F0}</ProjectGuid>
+    <ProjectGuid>{BD5C5B50-8567-4FEB-B93A-1BF12711EEB5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Bank</RootNamespace>
-    <AssemblyName>Bank</AssemblyName>
+    <RootNamespace>CandyCalculator</RootNamespace>
+    <AssemblyName>CandyCalculator</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\FileOperations.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -64,31 +65,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\CandyCalculator.cs" />
+    <Compile Include="Enums\DivideCandyMethod.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NewAccountWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="NewCustomerWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Accounts\BankAccount.cs" />
-    <Compile Include="Models\Accounts\CheckingAccount.cs" />
-    <Compile Include="Models\Accounts\RetirementAccount.cs" />
-    <Compile Include="Models\Accounts\SavingsAccount.cs" />
-    <Compile Include="Models\Customers\Customer.cs" />
-    <Compile Include="NewAccountWindow.xaml.cs">
-      <DependentUpon>NewAccountWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NewCustomerWindow.xaml.cs">
-      <DependentUpon>NewCustomerWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -114,6 +99,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

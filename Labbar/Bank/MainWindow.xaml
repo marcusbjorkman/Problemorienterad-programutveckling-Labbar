@@ -5,9 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bank"
         mc:Ignorable="d"
-        Title="MainWindow" Height="287.5" Width="379.464">
+        Title="Bank" Height="557.5" Width="380" WindowStartupLocation="CenterScreen" Background="MediumAquamarine">
     <Grid>
-        <Button Content="Dummy" Click="Button_Click" HorizontalAlignment="Left" Margin="111,83,0,0" VerticalAlignment="Top" Width="129" Height="73"/>
+        <Label Content="Välj kund" FontSize="14" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="150"/>
+        <ComboBox x:Name="ComboBoxCustomer" SelectionChanged="ComboBoxCustomer_SelectionChanged" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Width="346"/>
+        <Button x:Name="BtnNewCustomer" Click="BtnNewCustomer_Click" Content="Ny kund?" HorizontalAlignment="Left" Margin="238,106,0,0" VerticalAlignment="Top" Width="118" Height="29"/>
 
+        <Grid x:Name="GridSelectCustomer" IsEnabled="false">
+            <Label Content="Kontouppgifter" FontSize="14" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="150"/>
+            <ComboBox x:Name="ComboBoxAccount" SelectionChanged="ComboBoxAccount_SelectionChanged" HorizontalAlignment="Left" Margin="10,184,0,0" VerticalAlignment="Top" Width="346"/>
+            <Button x:Name="BtnNewAccount" Click="BtnNewAccount_Click" Content="Nytt konto?" HorizontalAlignment="Left" Margin="238,211,0,0" VerticalAlignment="Top" Width="118" Height="29"/>
+            
+            <Grid x:Name="GridSelectAccount" IsEnabled="False">
+                <Label Content="Hantera transaktioner" FontSize="14" HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top" Width="150"/>
+                <Label Content="Typ" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="RadioBtnWithdraw" IsChecked="True" GroupName="RadioTransactionType" Content="Uttag" HorizontalAlignment="Left" Margin="10,316,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="RadioBtnDeposit" GroupName="RadioTransactionType" Content="Insättning" HorizontalAlignment="Left" Margin="10,331,0,0" VerticalAlignment="Top" Width="113"/>
+                <Label Content="Belopp" HorizontalAlignment="Left" Margin="106,290,0,0" VerticalAlignment="Top" Width="74"/>
+                <TextBox x:Name="TxtBoxAmount" HorizontalAlignment="Left" Height="30" Margin="106,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127"/>
+                <Button x:Name="BtnOkTransaction" Click="BtnOkTransaction_Click" Content="Ok" HorizontalAlignment="Left" Margin="238,316,0,0" VerticalAlignment="Top" Width="118" Height="30"/>
+                <Label Content="Kontoutdrag" HorizontalAlignment="Left" Margin="10,374,0,0" VerticalAlignment="Top" Width="122"/>
+                <TextBlock x:Name="TxtBlockWithdrawals" HorizontalAlignment="Left" Margin="10,400,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="112" Width="346" Background="White"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

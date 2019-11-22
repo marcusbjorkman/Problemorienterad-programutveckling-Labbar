@@ -1,0 +1,20 @@
+﻿<Window x:Class="Bank.NewAccountWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bank"
+        mc:Ignorable="d"
+        Title="Bank - Nytt konto" Height="250.267" Width="210.428" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Label Content="Skapa konto" FontSize="14" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Typ" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RadioBtnChecking" IsChecked="True" GroupName="RadioAccountType" Checked="RadioBtnChecking_Checked" Unchecked="RadioBtnChecking_Unchecked" Content="Lönekonto" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RadioBtnSaving" GroupName="RadioAccountType" Content="Sparkonto" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RadioBtnRetirement" GroupName="RadioAccountType" Content="Pensionsspar" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
+        <Label Content="Kredit" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtBoxCredit" HorizontalAlignment="Left" Text="0" Height="23" Margin="10,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="BtnAddAccount" Click="BtnAddAccount_Click" Content="Ok" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
